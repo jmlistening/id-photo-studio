@@ -1,0 +1,22 @@
+# Local scratch / work
+.work/
+.idea/
+.vscode/
+
+# Build / deployment artifacts
+部署包.zip
+node_modules/
+_site/
+
+# Python test caches
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.pytest_tmp/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log

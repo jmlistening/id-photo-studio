@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200">
+  <defs>
+    <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F2C8A6"/>
+      <stop offset="0.45" stop-color="#E8B48E"/>
+      <stop offset="1" stop-color="#D99A73"/>
+    </linearGradient>
+    <radialGradient id="faceLight" cx="0.42" cy="0.30" r="0.68">
+      <stop offset="0" stop-color="#FADCC0" stop-opacity="0.75"/>
+      <stop offset="0.62" stop-color="#F2C8A6" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#C9825C" stop-opacity="0.26"/>
+    </radialGradient>
+    <linearGradient id="hair" x1="0" y1="0" x2="0.7" y2="1">
+      <stop offset="0" stop-color="#2E1F1A"/>
+      <stop offset="0.55" stop-color="#1C1210"/>
+      <stop offset="1" stop-color="#120B0A"/>
+    </linearGradient>
+    <linearGradient id="suit" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2B3547"/>
+      <stop offset="1" stop-color="#151B26"/>
+    </linearGradient>
+    <linearGradient id="shirt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#E4EAF2"/>
+    </linearGradient>
+    <radialGradient id="cheek" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#D77C6B" stop-opacity="0.24"/>
+      <stop offset="1" stop-color="#D77C6B" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+    <filter id="soft6" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.028"/></feComponentTransfer>
+    </filter>
+  </defs>
+
+  <rect width="900" height="1200" fill="#438EDB"/>
+
+  <!-- shoulders / suit -->
+  <path d="M50 1200 C74 956 168 842 300 808 L450 880 L600 808 C732 842 826 956 850 1200 Z" fill="url(#suit)"/>
+  <!-- shirt -->
+  <path d="M300 808 L450 1010 L600 808 Z" fill="url(#shirt)"/>
+  <!-- lapels -->
+  <path d="M300 808 L450 1010 L424 1088 L268 884 Z" fill="#202838"/>
+  <path d="M600 808 L450 1010 L476 1088 L632 884 Z" fill="#202838"/>
+  <path d="M300 808 L450 1010 L440 1042 L292 846 Z" fill="#323D52" opacity="0.55"/>
+  <path d="M600 808 L450 1010 L460 1042 L608 846 Z" fill="#323D52" opacity="0.55"/>
+  <!-- collar -->
+  <path d="M340 782 L450 884 L420 906 L318 806 Z" fill="#F8FAFD"/>
+  <path d="M560 782 L450 884 L480 906 L582 806 Z" fill="#F8FAFD"/>
+  <path d="M340 782 L450 884 L432 896 L326 794 Z" fill="#D7E0EB" opacity="0.55"/>
+  <path d="M560 782 L450 884 L468 896 L574 794 Z" fill="#D7E0EB" opacity="0.55"/>
+
+  <!-- neck -->
+  <path d="M382 650 L382 782 C382 826 518 826 518 782 L518 650 Z" fill="#DCA27C"/>
+  <path d="M382 650 L382 700 C414 742 486 742 518 700 L518 650 Z" fill="#C98560" opacity="0.55" filter="url(#soft6)"/>
+
+  <!-- ears -->
+  <ellipse cx="272" cy="505" rx="28" ry="58" fill="#DEA27B"/>
+  <ellipse cx="628" cy="505" rx="28" ry="58" fill="#DEA27B"/>
+  <path d="M272 482 C286 496 288 520 280 538" fill="none" stroke="#C4815C" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+  <path d="M628 482 C614 496 612 520 620 538" fill="none" stroke="#C4815C" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- head -->
+  <path d="M450 236 C592 236 650 338 650 470 C650 612 572 720 450 720 C328 720 250 612 250 470 C250 338 308 236 450 236 Z" fill="url(#skin)"/>
+  <path d="M450 236 C592 236 650 338 650 470 C650 612 572 720 450 720 C328 720 250 612 250 470 C250 338 308 236 450 236 Z" fill="url(#faceLight)"/>
+
+  <!-- face shading -->
+  <ellipse cx="356" cy="604" rx="46" ry="24" fill="url(#cheek)"/>
+  <ellipse cx="544" cy="604" rx="46" ry="24" fill="url(#cheek)"/>
+  <ellipse cx="450" cy="700" rx="78" ry="22" fill="#B97050" opacity="0.20" filter="url(#soft6)"/>
+
+  <!-- hair -->
+  <path d="M246 496 C232 326 320 206 452 206 C592 206 670 318 656 502 C650 438 636 400 618 370 C602 406 564 428 518 432 C460 436 406 416 374 382 C344 418 302 444 268 456 C256 468 250 482 246 496 Z" fill="url(#hair)"/>
+  <path d="M270 430 C292 330 360 270 440 252" fill="none" stroke="#5B4138" stroke-width="10" stroke-linecap="round" opacity="0.30" filter="url(#soft6)"/>
+  <path d="M470 224 C502 260 522 320 518 382" fill="none" stroke="#0F0A09" stroke-width="7" stroke-linecap="round" opacity="0.55"/>
+  <path d="M612 352 C642 400 650 458 646 500" fill="none" stroke="#0F0A09" stroke-width="7" stroke-linecap="round" opacity="0.35"/>
+
+  <!-- eyebrows -->
+  <path d="M338 438 C362 420 404 422 424 438 C400 432 366 432 338 438 Z" fill="#3B2620"/>
+  <path d="M476 438 C496 422 538 420 562 438 C534 432 500 432 476 438 Z" fill="#3B2620"/>
+
+  <!-- eyes -->
+  <g>
+    <path d="M336 494 C356 470 404 470 424 494 C404 516 356 516 336 494 Z" fill="#F7F4F0"/>
+    <path d="M476 494 C496 470 544 470 564 494 C544 516 496 516 476 494 Z" fill="#F7F4F0"/>
+    <circle cx="380" cy="493" r="20" fill="#5B3A28"/>
+    <circle cx="520" cy="493" r="20" fill="#5B3A28"/>
+    <circle cx="380" cy="493" r="11" fill="#1A1210"/>
+    <circle cx="520" cy="493" r="11" fill="#1A1210"/>
+    <circle cx="374" cy="486" r="5" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="514" cy="486" r="5" fill="#FFFFFF" opacity="0.9"/>
+    <path d="M336 494 C356 470 404 470 424 494" fill="none" stroke="#2B1A14" stroke-width="6" stroke-linecap="round"/>
+    <path d="M476 494 C496 470 544 470 564 494" fill="none" stroke="#2B1A14" stroke-width="6" stroke-linecap="round"/>
+    <path d="M342 500 C362 520 404 520 420 500" fill="none" stroke="#B77A5C" stroke-width="3" opacity="0.55"/>
+    <path d="M482 500 C502 520 544 520 560 500" fill="none" stroke="#B77A5C" stroke-width="3" opacity="0.55"/>
+  </g>
+
+  <!-- nose -->
+  <path d="M450 502 C446 540 438 566 446 580 C452 590 468 590 474 580" fill="none" stroke="#C98661" stroke-width="5" stroke-linecap="round" opacity="0.5"/>
+  <path d="M438 578 C446 584 454 584 462 578" fill="none" stroke="#B3714F" stroke-width="4" stroke-linecap="round" opacity="0.42"/>
+
+  <!-- mouth -->
+  <path d="M398 626 C424 616 476 616 502 626 C480 646 420 646 398 626 Z" fill="#B45B56"/>
+  <path d="M398 626 C424 632 476 632 502 626 C480 638 420 638 398 626 Z" fill="#8E3F3D" opacity="0.55"/>
+  <path d="M404 622 C430 628 470 628 496 622" fill="none" stroke="#7E3735" stroke-width="2.5" opacity="0.4"/>
+
+  <!-- light & grain -->
+  <ellipse cx="356" cy="326" rx="92" ry="112" fill="#FFFFFF" opacity="0.10" filter="url(#soft)"/>
+  <rect width="900" height="1200" filter="url(#grain)" opacity="0.5"/>
+</svg>

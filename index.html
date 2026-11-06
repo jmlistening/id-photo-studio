@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 隐私防线：MediaPipe 上游运行时自带一个遥测上报器，会向 Google 的
+     odml.pa.googleapis.com 发送匿名运行日志。connect-src 只允许同源请求，
+     从浏览器层面阻断这次外发；照片像素本来就不在任何请求里。 -->
+<meta http-equiv="Content-Security-Policy" content="connect-src 'self' blob: data:">
+<title>证件照小工具 · ID Photo Studio</title>
+<meta name="description" content="纯前端证件照工具：裁剪、换底色、人像 AI 抠图、按 KB 压缩并写入 DPI。照片只在本机处理，不上传。">
+<link rel="canonical" href="https://jmlistening.github.io/id-photo-studio/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jmlistening.github.io/id-photo-studio/">
+<meta property="og:title" content="证件照小工具 · ID Photo Studio">
+<meta property="og:description" content="裁剪、换底色、人像 AI 抠图、按 KB 压缩并写入 DPI。照片只在本机处理，不上传。">
+<meta property="og:image" content="https://jmlistening.github.io/id-photo-studio/docs/images/bg-variants.png">
+<meta property="og:image:width" content="1800">
+<meta property="og:image:height" content="1080">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://jmlistening.github.io/id-photo-studio/docs/images/bg-variants.png">
+<meta name="theme-color" content="#2563eb">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="证件照">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <div class="brand"><span class="logo">证</span><span>证件照小工具</span></div>
+  <div class="top-actions">
+    <button id="btnImport" class="primary">导入照片</button>
+    <button id="btnUndo" class="ghost" disabled>撤销</button>
+    <button id="btnRedo" class="ghost" disabled>重做</button>
+    <button id="btnCompare" class="ghost" disabled>按住对比</button>
+    <button id="btnReset" class="ghost" disabled>重置</button>
+  </div>
+</div>
+<div id="fileBanner" class="banner hidden">当前是直接打开文件，AI 抠图不可用。双击 <b>启动.bat</b> 打开完整版。</div>
+<main class="layout">
+  <section class="stage" id="canvasWrap">
+    <canvas id="view"></canvas>
+    <div class="empty" id="emptyState">
+      <div class="empty-icon">＋</div>
+      <p>拖入照片，或点击“导入照片”</p>
+      <p class="muted">支持 JPG / PNG / WebP / HEIC · 全程本地处理，不上传</p>
+    </div>
+    <div class="stage-tools">
+      <button id="btnFit" class="chip">重置裁剪</button>
+      <label class="chip"><input type="checkbox" id="chkGrid" checked> 网格</label>
+      <span id="zoomLabel" class="chip muted">100%</span>
+    </div>
+    <div id="busy" class="busy hidden"><span class="spinner"></span><span id="busyText">处理中…</span></div>
+    <div id="toast" class="toast hidden"></div>
+  </section>
+  <aside class="panel">
+    <div id="statusLine" class="status">导入一张照片开始</div>
+
+    <section class="card">
+      <div class="card-head"><h2>尺寸</h2><span class="tag" id="dpiTag">300 DPI</span></div>
+      <label class="field"><span>规格</span><select id="presetSelect"></select></label>
+      <div class="grid2">
+        <label class="field"><span>宽</span><div class="input-unit"><input type="number" id="outW" min="1" step="1" value="295"><i>px</i></div></label>
+        <label class="field"><span>高</span><div class="input-unit"><input type="number" id="outH" min="1" step="1" value="413"><i>px</i></div></label>
+      </div>
+      <div class="grid2">
+        <label class="field"><span>宽</span><div class="input-unit"><input type="number" id="mmW" min="1" step="0.1" value="25"><i>mm</i></div></label>
+        <label class="field"><span>高</span><div class="input-unit"><input type="number" id="mmH" min="1" step="0.1" value="35"><i>mm</i></div></label>
+      </div>
+      <div class="grid2">
+        <label class="field"><span>DPI</span><input type="number" id="dpiInput" min="72" step="1" value="300"></label>
+        <button id="btnSwap" class="ghost wide">横竖互换</button>
+      </div>
+      <p class="hint" id="sizeHint">一寸 295×413 · 25×35mm</p>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>底色</h2></div>
+      <div class="swatches" id="swatches"></div>
+      <div class="color-row">
+        <label class="color-pick"><input type="color" id="customColor" value="#438EDB"><span>自定义</span></label>
+        <input type="text" id="hexInput" class="hex" value="#438EDB" spellcheck="false">
+      </div>
+      <label class="check"><input type="checkbox" id="chkGradient"> 轻微渐变（避免平涂感）</label>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>抠图</h2><span class="tag" id="engineTag">色键</span></div>
+      <label class="field"><span>方式</span>
+        <select id="engineSelect">
+          <option value="auto">自动判断</option>
+          <option value="color">纯色底（色键）</option>
+          <option value="ai">人像 AI</option>
+        </select>
+      </label>
+      <div class="row">
+        <button id="btnRekey" class="ghost">重新抠图</button>
+        <button id="btnBrush" class="ghost">笔刷修补</button>
+        <button id="btnInvert" class="ghost">反相蒙版</button>
+      </div>
+      <div class="slider-row"><span>容差</span><input type="range" id="tolerance" min="10" max="100" value="50"><b id="tolVal">50</b></div>
+      <div class="slider-row"><span>羽化</span><input type="range" id="feather" min="0" max="6" step="0.5" value="1"><b id="featherVal">1</b></div>
+      <div class="slider-row"><span>去溢色</span><input type="range" id="despill" min="0" max="100" value="60"><b id="despillVal">60</b></div>
+      <div id="brushTools" class="brush-tools hidden">
+        <div class="seg">
+          <button id="brushErase" class="seg-btn active">擦除</button>
+          <button id="brushAdd" class="seg-btn">恢复</button>
+        </div>
+        <div class="slider-row"><span>笔刷</span><input type="range" id="brushSize" min="4" max="160" value="36"><b id="brushVal">36</b></div>
+        <p class="hint">在画布上涂抹：擦掉多余的背景，或恢复被误删的人像。</p>
+      </div>
+      <p class="hint" id="engineHint">导入照片后自动检测背景。</p>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>导出</h2></div>
+      <div class="grid2">
+        <label class="field"><span>格式</span><select id="formatSelect"><option value="jpeg">JPG</option><option value="png">PNG</option></select></label>
+        <label class="field"><span>质量</span><div class="input-unit"><input type="number" id="quality" min="30" max="100" value="92"><i>%</i></div></label>
+      </div>
+      <label class="check"><input type="checkbox" id="chkTargetKb"> 压到不超过 <input type="number" id="targetKb" min="10" step="1" value="50" class="tiny"> KB</label>
+      <label class="field" style="margin-top:10px"><span>文件名</span><input type="text" id="fileName" value="证件照" spellcheck="false"></label>
+      <button id="btnExport" class="primary wide" disabled>导出照片</button>
+      <p class="hint" id="exportInfo"></p>
+    </section>
+  </aside>
+</main>
+<input type="file" id="fileInput" accept="image/*,.heic,.heif" hidden>
+<script src="vendor/lib/heic2any.min.js"></script>
+<script src="specs.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
