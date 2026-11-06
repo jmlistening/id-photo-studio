@@ -17,7 +17,7 @@ No account, no upload, no tracking.</p>
 <img alt="MIT License" src="https://img.shields.io/badge/License-MIT-2EA44F">
 </p>
 
-<p><a href="README.zh-CN.md">简体中文</a> · <strong>English</strong></p>
+<p><a href="README.md"><strong>English</strong></a> · <a href="README.zh-CN.md">简体中文</a></p>
 
 </div>
 
