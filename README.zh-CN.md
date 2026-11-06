@@ -19,6 +19,8 @@
 
 <p><a href="README.md">English</a> | <a href="README.zh-CN.md">简体中文</a></p>
 
+<p><strong><a href="docs/images/demo.gif">▶ 观看动图演示</a></strong></p>
+
 </div>
 
 <p align="center">
