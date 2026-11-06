@@ -21,6 +21,12 @@ No account, no upload, no tracking.</p>
 
 </div>
 
+<p align="center">
+  <img src="docs/images/demo.gif" alt="Animated demo: import a portrait, change the background, set a 50 KB target and export" width="100%">
+</p>
+
+<p align="center"><sub>Animated demo: import → change background → set a 50 KB target → export.</sub></p>
+
 ---
 
 **[Live Demo](https://jmlistening.github.io/id-photo-studio/)** · **[Overview](#-overview)** · **[Features](#-features)** · **[Demo](#-demo)** · **[Privacy and security](#-privacy-and-security)** · **[Quick start](#-quick-start)** · **[Engineering](#-engineering)** · **[Testing and quality](#-testing-and-quality)** · **[Design notes](docs/DESIGN.md)** · **[Changelog](CHANGELOG.md)**
@@ -51,12 +57,6 @@ This project turns the whole flow into a **pure static web page**:
 </p>
 
 <p align="center"><sub>Import the synthetic demo portrait → detect a solid background → color-key it to white → set a 50 KB target and export. The right panel shows the spec, background, matting controls and export options.</sub></p>
-
-<p align="center">
-  <img src="docs/images/demo.gif" alt="Animated demo: import a portrait, change the background, set a 50 KB target and export" width="100%">
-</p>
-
-<p align="center"><sub>Animated demo: import → change background → set a 50 KB target → export.</sub></p>
 
 ## 🚀 Features
 

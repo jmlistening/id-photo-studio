@@ -21,6 +21,12 @@
 
 </div>
 
+<p align="center">
+  <img src="docs/images/demo.gif" alt="动图演示：导入人像、换底色、设置 50 KB 目标并导出" width="100%">
+</p>
+
+<p align="center"><sub>动图演示：导入 → 换底色 → 设置 50 KB 目标 → 导出。</sub></p>
+
 ---
 
 **[在线试用](https://jmlistening.github.io/id-photo-studio/)** · **[项目概览](#-项目概览)** · **[功能一览](#-功能一览)** · **[效果演示](#-效果演示)** · **[隐私与安全模型](#-隐私与安全模型)** · **[快速开始](#-快速开始)** · **[工程实现](#-工程实现)** · **[测试与质量](#-测试与质量)** · **[工程设计](docs/DESIGN.md)** · **[更新记录](CHANGELOG.md)**
@@ -51,12 +57,6 @@
 </p>
 
 <p align="center"><sub>导入合成演示人像 → 自动识别纯色背景 → 色键换白底 → 设置 50KB 目标并导出。右侧同时显示规格、底色、抠图参数和导出选项。</sub></p>
-
-<p align="center">
-  <img src="docs/images/demo.gif" alt="动图演示：导入人像、换底色、设置 50 KB 目标并导出" width="100%">
-</p>
-
-<p align="center"><sub>动图演示：导入 → 换底色 → 设置 50 KB 目标 → 导出。</sub></p>
 
 ## 🚀 功能一览
 
