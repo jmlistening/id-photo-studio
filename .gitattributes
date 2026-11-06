@@ -7,6 +7,7 @@
 *.jpg binary
 *.jpeg binary
 *.webp binary
+*.gif binary
 *.ico binary
 *.wasm binary
 *.tflite binary

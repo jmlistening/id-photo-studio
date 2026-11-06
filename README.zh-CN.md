@@ -52,6 +52,12 @@
 
 <p align="center"><sub>导入合成演示人像 → 自动识别纯色背景 → 色键换白底 → 设置 50KB 目标并导出。右侧同时显示规格、底色、抠图参数和导出选项。</sub></p>
 
+<p align="center">
+  <img src="docs/images/demo.gif" alt="动图演示：导入人像、换底色、设置 50 KB 目标并导出" width="100%">
+</p>
+
+<p align="center"><sub>动图演示：导入 → 换底色 → 设置 50 KB 目标 → 导出。</sub></p>
+
 ## 🚀 功能一览
 
 | 模块 | 具体能力 | 实现要点 |
@@ -296,7 +302,7 @@ id-photo-studio/
 │  ├─ DESIGN.md              # 产品设计单
 │  ├─ ENGINEERING.md         # 工程实现说明
 │  ├─ demo/                  # 合成演示人像（SVG）
-│  └─ images/                # README 截图与效果图
+│  └─ images/                # README 截图、动图与效果图
 ├─ tests/
 │  └─ smoke.py               # 无头浏览器冒烟测试
 ├─ .github/workflows/        # CI + Pages
