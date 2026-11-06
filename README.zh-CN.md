@@ -17,7 +17,7 @@
 <img alt="MIT License" src="https://img.shields.io/badge/License-MIT-2EA44F">
 </p>
 
-<p><a href="README.md">English</a> · <a href="README.zh-CN.md"><strong>简体中文</strong></a></p>
+<p><a href="README.md">English</a> | <a href="README.zh-CN.md">简体中文</a></p>
 
 </div>
 
