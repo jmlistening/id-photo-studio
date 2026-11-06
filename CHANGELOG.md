@@ -15,6 +15,7 @@
 - Windows 一键启动器（PowerShell 静态服务器，无需安装运行环境）。
 - 浏览器自测、导出测试、AI 测试、Service Worker 测试。
 - GitHub Actions CI 与 GitHub Pages 部署 workflow。
+- 双语 README：英文默认 + 简体中文（`README.zh-CN.md`），顶部可切换。
 
 ### Security / Privacy
 
